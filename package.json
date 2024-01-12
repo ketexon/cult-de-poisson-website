@@ -1,0 +1,43 @@
+{
+  "name": "cult-de-poisson",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@mui/material": "^5.15.4",
+    "@next/mdx": "^14.0.4",
+    "@types/mdx": "^2.0.10",
+    "@types/react": "^18.2.47",
+    "next": "^14.0.4",
+    "next-mdx-remote": "^4.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/argparse": "^2.0.14",
+    "@types/node": "20.10.8",
+    "argparse": "^2.0.1",
+    "gray-matter": "^4.0.3",
+    "nodemon": "^3.0.2",
+    "sass": "^1.69.7",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "5.3.3"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "yarn gen && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "gen": "tsx src/codegen/index-content.ts",
+    "gen:dev": "tsx src/codegen/index-content.ts --draft",
+    "gen:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts\"",
+    "gen:dev:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts --draft\""
+  }
+}
