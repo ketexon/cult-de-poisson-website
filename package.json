@@ -23,6 +23,7 @@
     "@types/argparse": "^2.0.14",
     "@types/node": "20.10.8",
     "argparse": "^2.0.1",
+    "concurrently": "^8.2.2",
     "gray-matter": "^4.0.3",
     "nodemon": "^3.0.2",
     "sass": "^1.69.7",
@@ -31,13 +32,14 @@
     "typescript": "5.3.3"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev-server": "next dev",
     "build": "yarn gen && next build",
     "start": "next start",
     "lint": "next lint",
     "gen": "tsx src/codegen/index-content.ts",
     "gen:dev": "tsx src/codegen/index-content.ts --draft",
     "gen:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts\"",
-    "gen:dev:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts --draft\""
+    "gen:dev:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts --draft\"",
+    "dev": "concurrently \"yarn dev-server\" \"yarn gen:watch --draft\""
   }
 }
