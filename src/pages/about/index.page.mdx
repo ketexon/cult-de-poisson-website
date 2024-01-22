@@ -1,0 +1,20 @@
+import Head from "next/head";
+import generateTitle from "~/util/generateTitle";
+import Image from "@/Image"
+
+import srsPitchPhoto from "./srs-pitch.jpg"
+
+<Head>
+	<title>{generateTitle("About")}</title>
+</Head>
+
+# About
+
+Cult de Poisson is an indie studio formed by UCLA students Nicolette Bond, Maya Balakrish, Anbu V, and Aubrey Clark.
+
+<Image
+	src={srsPitchPhoto}
+	width="500"
+	caption="From left-to-right: Anbu V, Maya Balakrish, Nicolette Bond, Aubrey Clark"
+	alt=""
+/>

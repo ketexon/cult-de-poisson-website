@@ -10,3 +10,7 @@ body {
 #__next {
 	display: contents;
 }
+
+img {
+	max-width: 100%;
+}

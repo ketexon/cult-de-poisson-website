@@ -3,6 +3,7 @@ import { MDXContent, MDXModule } from "mdx/types";
 import { Box, Stack, Typography } from "@mui/material";
 import { parsePost } from "~/types/Post"
 import Link from "~/components/Link";
+import formatHTMLTimeDate from "~/util/formatHTMLTimeDate";
 import formatDate from "~/util/formatDate";
 import { Page, PageIndex } from "~/types/Page";
 import { Template } from "./Template";
@@ -41,7 +42,7 @@ export default function(pages: PageIndex, pageSegmentName: string = "page"): Tem
 					<Typography variant="h1">
 						{post.title}
 					</Typography>
-					<Typography variant="subtitle1">
+					<Typography variant="subtitle1" component="time" dateTime={formatHTMLTimeDate(post.date)}>
 						{formatDate(post.date)}
 					</Typography>
 				</Stack>
