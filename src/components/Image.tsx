@@ -1,9 +1,14 @@
-import { Stack, Typography } from "@mui/material"
+import { Stack, StackProps, Typography } from "@mui/material"
 import NextImage, { ImageProps as NextImageProps } from "next/image"
+import { CSSProperties } from "react";
 
-export type ImageProps = {
+export type ImageProps = NextImageProps & {
 	caption?: string,
-} & NextImageProps
+	imageStyle?: NextImageProps["style"],
+	sx?: Exclude<StackProps["sx"], ReadonlyArray<any>>,
+	style?: StackProps["style"],
+	objectFit?: CSSProperties["objectFit"]
+}
 
 function getStaticImageData(src: ImageProps["src"]) {
 	return typeof src === "string"
@@ -17,18 +22,28 @@ function getImageSrc(src: ImageProps["src"]) {
 	return typeof getStaticImageData(src)?.src ?? src as string;
 }
 
-export default function Image({ caption, ...props }: ImageProps){
+export default function Image({ caption, sx, ...props }: ImageProps){
 	const staticImageData = getStaticImageData(props.src);
 
-	return <Stack component="figure" m={0} display="inline-flex" alignItems="stretch" sx={{ float: "right" }}>
+	return <Stack component="figure" m={0} display="inline-flex" alignItems="stretch" sx={[
+			{
+				// float: "right",
+				"& .CDP-Image__img": {
+					objectFit: props.objectFit ?? "cover",
+					maxHeight: "100%",
+					...(props.imageStyle ?? {})
+				},
+			},
+			sx ?? {}
+		]}>
 		<NextImage
+			className="CDP-Image__img"
 			{...{
 				loading: "eager",
 				...props,
 				...(props.width && !props.height && staticImageData) ? {
 					height: parseInt(props.width.toString()) * staticImageData.height / staticImageData.width
 				} : {},
-				style: { objectFit: "cover", ...(props.style ?? {}) },
 			}}
 		/>
 		{ caption && <Typography variant="subtitle1" component="figcaption" sx={{ minWidth: 0, width: "100%", }}>{caption}</Typography>}

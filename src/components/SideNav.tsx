@@ -1,7 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Link from "./Link";
 
+import DiscordLogo from "~/assets/brands/discord-mark-white.svg"
+
 import menuConfig from "~/menuConfig";
+import Image from "./Image";
 
 export default function SideNav(){
 	return (
@@ -45,7 +48,9 @@ export default function SideNav(){
 				justifyContent="flex-end"
 				sx={{ gridRowStart: 3 }}
 			>
-				Hello
+				<Link href="https://discord.gg/Q5CVBDsz8N" target="_blank" color="primary.light">
+					<Image src={DiscordLogo} alt="Discord" objectFit="contain" sx={{ height: "2rem", aspectRatio: 1 }}/>
+				</Link>
 			</Stack>
 		</Box>
 	);
