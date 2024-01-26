@@ -308,6 +308,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource-variable/grandstander@^5.0.19":
+  version "5.0.19"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/grandstander/-/grandstander-5.0.19.tgz#290c91c953ff5901b83d0a22ae41c4540a74bcf4"
+  integrity sha512-tkWTn+8zNauYLvRdPxk7a+jZvSnNGaYAK71kiyuXggja4QSHH693xK2GVuzDIEekZV/Tj9H8ZdE3cwX/7eH15A==
+
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.1.tgz#c08679063f279615a3326583ba3a90d1d82cc721"

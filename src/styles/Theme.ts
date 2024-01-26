@@ -4,11 +4,13 @@ export default createTheme({
 	typography: {
 		h1: {
 			fontSize: "2rem",
-			fontWeight: "bold",
+			fontWeight: "black",
+			fontFamily: "Grandstander Variable"
 		},
 		h2: {
 			fontSize: "1.75rem",
-			fontWeight: "normal",
+			fontFamily: "Grandstander Variable",
+			fontWeight: "semibold",
 		},
 		h3: {
 			fontSize: "1.5rem",
@@ -37,14 +39,23 @@ export default createTheme({
 	},
 	palette: {
 		primary: {
-			light: "#88af36",
-			main: "#1a4913",
+			light: "#FFDB7E",
+			main: "#FF9900",
 		},
 		secondary: {
-			main: "#1a4913",
+			main: "#5769C8",
+			light: "#C5D8DE",
 		},
 		background: {
-			default: "#ffffe4"
+			default: "#F6F2EB"
+		}
+	},
+	components: {
+		MuiButtonBase: {
+			defaultProps: {
+				disableRipple: true,
+				disableTouchRipple: true,
+			}
 		}
 	}
 })
