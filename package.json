@@ -33,7 +33,7 @@
     "typescript": "5.3.3"
   },
   "scripts": {
-    "dev-server": "next dev",
+    "dev:server": "next dev",
     "build": "yarn gen && next build",
     "start": "next start",
     "lint": "next lint",
