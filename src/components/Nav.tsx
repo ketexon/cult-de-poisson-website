@@ -62,18 +62,18 @@ export default function Nav(){
 						})}
 					>
 						{menuConfig.items.map(({ href, title }) => (
-							<Link href={href} color="secondary" key={title} onClick={() => }>
-								<Typography
-									variant="h2"
-									textTransform="lowercase"
-									fontWeight="normal"
-									sx={{
-										textDecorationThickness: "1em",
-									}}
-								>
-									{title}
-								</Typography>
-							</Link>
+							<Link href={href} color="secondary" key={title} onClick={() => { setOpen(false); }}>
+							<Typography
+								variant="h2"
+								textTransform="lowercase"
+								fontWeight="normal"
+								sx={{
+									textDecorationThickness: "1em",
+								}}
+							>
+								{title}
+							</Typography>
+						</Link>
 						))}
 					</Menu>
 				</Box>

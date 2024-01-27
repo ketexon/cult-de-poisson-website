@@ -14,33 +14,50 @@ import generateTitle from "~/util/generateTitle";
 import Container from "~/components/Container";
 
 import crumpledPaperBackground from "~/assets/backgrounds/crumpled-paper.png"
+import { AppProps } from "next/app";
+import { NextPage } from "next";
 
-export default function App({ Component, pageProps }) {
-	console.log(Component.maxWidth);
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+	getLayout?: (page: React.ReactElement) => React.ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+	Component: NextPageWithLayout
+}
+
+function DefaultLayout({ children }) {
+	return (
+		<Box sx={{
+			height: "100%",
+		}}>
+			<Box sx={{
+				width: "100%",
+				height: "100%",
+				position: "absolute",
+				top: 0,
+				left: 0,
+				pointerEvents: "none",
+				background: `url("${crumpledPaperBackground.src}")`,
+				backgroundSize: "cover",
+				opacity: "0.2",
+				backgroundBlendMode: "darken"
+			}}></Box>
+			<Nav />
+			<Container component="main">
+				{ children }
+			</Container>
+		</Box>
+	)
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+	const getLayout = Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
+	// if(Component.layout)
 
 	return (
 		<ThemeProvider theme={theme}>
-			<CssBaseline/>
-			<Box sx={{
-				height: "100%",
-			}}>
-				<Box sx={{
-					width: "100%",
-					height: "100%",
-					position: "absolute",
-					top: 0,
-					left: 0,
-					pointerEvents: "none",
-					background: `url("${crumpledPaperBackground.src}")`,
-					backgroundSize: "cover",
-					opacity: "0.2",
-					backgroundBlendMode: "darken"
-				}}></Box>
-				<Nav/>
-				<Container component="main">
-					<Component {...pageProps} />
-				</Container>
-			</Box>
+			<CssBaseline />
+			{getLayout(<Component {...pageProps}/>)}
 		</ThemeProvider>
 	)
 }
