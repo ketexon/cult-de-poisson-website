@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Box, Stack, Typography, AppBar, Toolbar, IconButton, useScrollTrigger } from "@mui/material";
 import Link from "./Link";
 
 import menuConfig from "~/menuConfig";
@@ -6,16 +6,15 @@ import { MenuIcon } from "./Icons";
 import React from "react";
 import Menu from "./Menu";
 
-/*
-<Stack direction="column" component="nav">
-					{menuConfig.items.map(({ title, href }) => (
-						<Link key={title} href={href} color="primary.light">{title}</Link>
-					))}
-				</Stack>
-*/
+export type NavProps = {
+}
 
-export default function Nav(){
-	const [open, setOpen] = React.useState(false);
+export default function Nav({ }: NavProps){
+	const [menuOpen, setOpen] = React.useState(false);
+	const elevated = useScrollTrigger({
+		disableHysteresis: true,
+		threshold: 64,
+	})
 
 	return (
 		<AppBar
@@ -23,10 +22,22 @@ export default function Nav(){
 			position="sticky"
 			elevation={0}
 			sx={theme => ({
-				background: "none",
+				background: elevated ? theme.palette.background.default : "transparent",
+				borderBottom: `1px solid transparent`,
+				borderBottomColor: elevated ? theme.palette.divider : "transparent",
+				transition: theme.transitions.create(["border-bottom-color", "background"], {
+					duration: theme.transitions.duration.shortest,
+					easing: theme.transitions.easing.easeOut,
+				}),
 			})}
 		>
-			<Toolbar sx={{ pt: 3, alignItems: "flex-end"}}>
+			<Toolbar sx={theme => ({
+				transition: theme.transitions.create("padding-top", {
+					duration: theme.transitions.duration.shortest,
+					easing: theme.transitions.easing.easeOut,
+				}),
+				pt: elevated ? 0 : 5,
+			})}>
 				<Box position="relative">
 					<IconButton onClick={() => { setOpen(o => !o); }}
 						sx={{
@@ -37,19 +48,23 @@ export default function Nav(){
 						<MenuIcon fontSize="medium"/>
 					</IconButton>
 					<Menu
-						open={open}
+						open={menuOpen}
 						hideWhileClosed={false}
 						handleClose={() => setOpen(false)}
 						sx={theme => ({
 							mt: 1,
-							background: theme.palette.background.default,
+							background: "transparent",
+							[theme.breakpoints.down("lg")]: {
+								background: theme.palette.background.default,
+								border: `1px solid ${theme.palette.divider}`
+							},
 							display: "flex",
 							flexDirection: "column",
-							transition: theme.transitions.create(["translate", "transform"], {
+							transition: theme.transitions.create(["translate", "transform", "background"], {
 								duration: theme.transitions.duration.enteringScreen,
 								easing: theme.transitions.easing.easeOut,
 							}),
-							transform: open
+							transform: menuOpen
 								? `
 									translateX(-2.5%)
 									rotate(5deg)
@@ -62,7 +77,7 @@ export default function Nav(){
 						})}
 					>
 						{menuConfig.items.map(({ href, title }) => (
-							<Link href={href} color="secondary" key={title} onClick={() => { setOpen(false); }}>
+							<Link href={href} color="primary" key={title} onClick={() => { setOpen(false); }}>
 							<Typography
 								variant="h2"
 								textTransform="lowercase"

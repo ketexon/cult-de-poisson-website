@@ -4,13 +4,13 @@ export default createTheme({
 	typography: {
 		h1: {
 			fontSize: "2rem",
-			fontWeight: "black",
-			fontFamily: "Grandstander Variable"
+			fontWeight: 800,
+			fontFamily: "Sniglet"
 		},
 		h2: {
 			fontSize: "1.75rem",
-			fontFamily: "Grandstander Variable",
-			fontWeight: "semibold",
+			fontFamily: "Sniglet",
+			fontWeight: 400,
 		},
 		h3: {
 			fontSize: "1.5rem",
@@ -47,7 +47,7 @@ export default createTheme({
 			light: "#C5D8DE",
 		},
 		background: {
-			default: "#F6F2EB"
+			default: "#134250"
 		}
 	},
 	components: {

@@ -7,7 +7,7 @@ export type ImageProps = NextImageProps & {
 	imageStyle?: NextImageProps["style"],
 	sx?: Exclude<StackProps["sx"], ReadonlyArray<any>>,
 	style?: StackProps["style"],
-	objectFit?: CSSProperties["objectFit"]
+	objectFit?: CSSProperties["objectFit"],
 }
 
 function getStaticImageData(src: ImageProps["src"]) {

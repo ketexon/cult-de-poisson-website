@@ -2,6 +2,9 @@ import * as React from "react";
 
 import '@fontsource-variable/grandstander';
 
+import '@fontsource/sniglet/400.css';
+import '@fontsource/sniglet/800.css';
+
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../styles/Theme";
@@ -28,21 +31,20 @@ type AppPropsWithLayout = AppProps & {
 function DefaultLayout({ children }) {
 	return (
 		<Box sx={{
-			height: "100%",
+			position: "relative",
 		}}>
 			<Box sx={{
-				width: "100%",
-				height: "100%",
 				position: "absolute",
-				top: 0,
-				left: 0,
+				top: 0, bottom: 0,
+				left: 0, right: 0,
 				pointerEvents: "none",
 				background: `url("${crumpledPaperBackground.src}")`,
+				backgroundRepeat: "repeat",
 				backgroundSize: "cover",
 				opacity: "0.2",
 				backgroundBlendMode: "darken"
 			}}></Box>
-			<Nav />
+			<Nav/>
 			<Container component="main">
 				{ children }
 			</Container>
