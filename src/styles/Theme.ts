@@ -1,14 +1,18 @@
 import { createTheme } from "@mui/material/styles";
+import createPalette from "@mui/material/styles/createPalette";
+
+const primary = "#FF9900";
 
 export default createTheme({
 	typography: {
 		h1: {
-			fontSize: "2rem",
+			fontSize: "3rem",
 			fontWeight: 800,
-			fontFamily: "Sniglet"
+			fontFamily: "Sniglet",
+			color: primary
 		},
 		h2: {
-			fontSize: "1.75rem",
+			fontSize: "2.25rem",
 			fontFamily: "Sniglet",
 			fontWeight: 400,
 		},
@@ -29,6 +33,11 @@ export default createTheme({
 			fontStyle: "italic"
 		},
 		body1: {
+			fontSize: "1.25rem",
+			lineHeight: 1.5,
+			marginBottom: "1rem",
+		},
+		body2: {
 			fontSize: "1rem",
 			lineHeight: 1.15,
 		},
@@ -47,7 +56,8 @@ export default createTheme({
 			light: "#C5D8DE",
 		},
 		background: {
-			default: "#134250"
+			default: "#134250",
+			paper: "#EFEAE3",
 		}
 	},
 	components: {

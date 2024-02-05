@@ -5,6 +5,10 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	output: "export",
+	images: {
+		unoptimized: true,
+	},
 	pageExtensions: [
 		'page.js', 'index.js',
 		'page.jsx', 'index.jsx',

@@ -8,6 +8,7 @@ export type ImageProps = NextImageProps & {
 	sx?: Exclude<StackProps["sx"], ReadonlyArray<any>>,
 	style?: StackProps["style"],
 	objectFit?: CSSProperties["objectFit"],
+	setAspectRatio?: boolean,
 }
 
 function getStaticImageData(src: ImageProps["src"]) {
@@ -22,7 +23,8 @@ function getImageSrc(src: ImageProps["src"]) {
 	return typeof getStaticImageData(src)?.src ?? src as string;
 }
 
-export default function Image({ caption, sx, ...props }: ImageProps){
+export default function Image({ caption, sx, imageStyle, setAspectRatio, ...props }: ImageProps){
+	setAspectRatio ??= false;
 	const staticImageData = getStaticImageData(props.src);
 
 	return <Stack component="figure" m={0} display="inline-flex" alignItems="stretch" sx={[
@@ -31,7 +33,10 @@ export default function Image({ caption, sx, ...props }: ImageProps){
 				"& .CDP-Image__img": {
 					objectFit: props.objectFit ?? "cover",
 					maxHeight: "100%",
-					...(props.imageStyle ?? {})
+					...setAspectRatio && staticImageData ? {
+						aspectRatio: `${staticImageData.height} / ${staticImageData.width}`,
+					} : {},
+					...(imageStyle ?? {})
 				},
 			},
 			sx ?? {}

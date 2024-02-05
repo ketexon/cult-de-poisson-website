@@ -167,7 +167,7 @@ export default function Card({ imageSrc, name, description }: CardProps) {
 						<Typography variant="h2" component="h1" color="#28471A" textAlign="center">
 							{name}
 						</Typography>
-						<Typography variant="body1" color="#8A6B0C">
+						<Typography variant="body2" color="#8A6B0C">
 							{description}
 						</Typography>
 					</Box>

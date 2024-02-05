@@ -9,152 +9,179 @@ import NextLink from "next/link"
 
 import RotateText, { RotateTextProps } from "~/components/RotateText"
 
-import { Fish, SingleFish } from "./Fish";
+import { HomePageFish, HomePageFishProps } from "./HomePageFish";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 
 import CrumpledPaper from "~/assets/backgrounds/crumpled-paper.png"
-import Link from "~/components/Link";
 
-type IndexPageFishLinkProps = {
-	href?: string,
-	color: "primary" | "secondary" | "tertiary" | "background1" | "background2",
-	children?: string,
-	rotate: number,
-	rotateAmplitude?: number,
-	rotateInterval?: number,
-	translateX?: string,
-	translateY?: string,
-	flip?: boolean,
-	top?: string,
-	bottom?: string,
-};
+type FishPosition = {
+	text?: string,
+} & Pick<
+		HomePageFishProps,
+		"href" | "color" |
+		"rotate" | "translateX" | "translateY" |
+		"top" | "bottom" |
+		"size" | "flipX" | "flipY"
+	>
 
-function IndexPageFish({ href, children, color: colorKey, rotate, rotateInterval, rotateAmplitude, translateX, translateY, flip, top, bottom }: IndexPageFishLinkProps){
-	rotateInterval ??= 500;
-	rotateAmplitude ??= 2;
+const topFishPositions: FishPosition[] = [
+	{
+		text: "ABOUT US",
+		href: "/about",
+		color: "primary",
+		rotate: 45,
+		bottom: "16rem", translateX: "-100%",
+	},
+	{
+		text: "PROJECTS",
+		href: "/projects",
+		color: "secondary",
+		rotate: -20,
+		bottom: "0rem", translateX: "30%",
+		flipX: true, flipY: true,
+	},
 
-	translateX ??= "0";
-	translateY ??= "0";
+	{
+		color: "background1",
+		size: "medium",
 
-	flip ??= false;
+		rotate: -40,
+		bottom: "6rem",
+		translateX: "-35%",
+	},
 
-	const color = {
-		primary: "#A5C889",
-		secondary: "#E25F5F",
-		tertiary: "#D597C8",
-		background1: "#9FC4CD",
-		background2: "#54A6BA",
-	}[colorKey]
+	{
+		color: "background2",
+		size: "medium",
 
-	// we have to use effectful functions for animation, since CSS animations cannot transition
-	// after the animation ends. Thus, if we want a smooth transition for the rotation effect, we need
-	// to do it programmatically
-	const fishRef = React.useRef<HTMLDivElement>();
+		rotate: 0,
+		bottom: "0",
+		translateX: "-140%",
+		flipX: true, flipY: true,
+	},
 
-	React.useEffect(() => {
-		if(fishRef.current){
-			// store the current value in case the ref gets deleted (eg. rerouting)
-			const fish = fishRef.current;
+	{
+		color: "background1",
+		size: "large",
 
-			let mouseOver = false;
-			let currentRotatePercent = 0.5;
-			let currentRotateDuration = rotateInterval / 2;
+		rotate: -60,
+		bottom: "6rem",
+		translateX: "-180%",
+	},
 
-			const updateRotatePercent = () => fish.style.setProperty("--rotate-percent", `${currentRotatePercent}`);
-			const updateRotateDuration = () => fish.style.setProperty("--rotate-duration", `${currentRotateDuration}ms`);
+	{
+		color: "background2",
+		size: "medium",
 
-			const reset = () => {
-				mouseOver = false;
-				currentRotatePercent = 0.5;
-				currentRotateDuration = rotateInterval / 2;
+		rotate: -80,
+		bottom: "34rem",
+		translateX: "-170%",
+	},
 
-				updateRotatePercent();
-				updateRotateDuration();
-			}
+	{
+		color: "background2",
+		size: "medium",
 
-			const onTransitioned = (evt: TransitionEvent) => {
-				if(mouseOver && evt.propertyName === "rotate"){
-					if(currentRotateDuration !== rotateInterval){
-						currentRotateDuration = rotateInterval;
-						updateRotateDuration();
-					}
+		rotate: 75,
+		bottom: "21rem",
+		translateX: "-40%",
+	},
 
-					currentRotatePercent = (currentRotatePercent + 1) % 2;
-					updateRotatePercent();
-				}
-			}
+	{
+		color: "background1",
+		size: "medium",
 
-			const onMouseEnter = () => {
-				mouseOver = true;
+		rotate: 40,
+		bottom: "5rem",
+		translateX: "150%",
+		flipX: true,
+	},
+]
 
-				currentRotatePercent = 1;
-				updateRotatePercent();
-			}
+const bottomFishPositions: FishPosition[] = [
+	{
+		text: "DEVLOGS",
+		href: "/devlog",
+		color: "tertiary",
+		rotate: 40,
+		top: "8rem",
+		translateX: "-10%",
+		flipX: true,
+	},
 
-			const onMouseLeave = () => {
-				reset();
-			}
+	{
+		color: "background1",
+		size: "small",
+		rotate: -30,
+		top: "1rem",
+		translateX: "-320%",
+	},
 
-			fish.addEventListener("mouseenter", onMouseEnter);
-			fish.addEventListener("mouseleave", onMouseLeave);
-			fish.addEventListener("transitionend", onTransitioned);
-			fish.addEventListener("transitioncancel", onTransitioned);
+	{
+		color: "background2",
+		size: "large",
+		rotate: -30,
+		top: "6rem",
+		translateX: "-190%",
+		flipX: true,
+	},
 
-			return () => {
-				if(fish){
-					reset();
+	{
+		color: "background1",
+		size: "small",
+		rotate: -10,
+		top: "1rem",
+		translateX: "-110%",
+	},
 
-					fish.removeEventListener("mouseenter", onMouseEnter);
-					fish.removeEventListener("mouseleave", onMouseLeave);
-					fish.removeEventListener("transitionend", onTransitioned);
-					fish.removeEventListener("transitioncancel", onTransitioned);
-				}
-			};
-		}
-	})
+	{
+		color: "background1",
+		size: "small",
+		rotate: 50,
+		top: "5rem",
+		translateX: "70%",
+		flipY: true,
+	},
 
-	type WrapperProps = { children?: React.ReactNode, sx?: SxProps<Theme> };
-	const Wrapper = href
-		? ({ children, sx }: WrapperProps) => <Link href={href} display="block" sx={sx}>{children}</Link>
-		: ({ children, sx }: WrapperProps) => <Box sx={sx}>{children}</Box>
+	{
+		color: "background2",
+		size: "small",
+		rotate: 70,
+		top: "4rem",
+		translateX: "150%",
+		flipX: true,
+	},
 
-	return (
-		<Wrapper>
-			<SingleFish
-				text={children ?? ""}
-				ref={fishRef}
-				size="large"
-				fishColor={color}
-				draggable={false}
-				flip={flip}
-				sx={theme => ({
-					position: "absolute",
-					left: "50%",
-					...top ? { top: top } : {},
-					...bottom ? { bottom: bottom } : {},
-					translate: `${translateX} ${translateY}`,
-					transformOrigin: "center",
+	{
+		color: "background2",
+		size: "small",
+		rotate: -10,
+		top: "22rem",
+		translateX: "95%",
+		flipX: true,
+	},
 
-					"--rotate-duration": `${rotateInterval}ms`,
-					"--rotate-percent": `0.5`,
+	{
+		color: "background1",
+		size: "small",
+		rotate: 90,
+		top: "22rem",
+		translateX: "-40%",
+		flipX: true,
+		flipY: true,
+	},
 
-					"--rotate-min": `${rotate - rotateAmplitude}deg`,
-					"--rotate-max": `${rotate + rotateAmplitude}deg`,
-					rotate: `calc(
-						var(--rotate-min) * var(--rotate-percent)
-						+ var(--rotate-max) * (1 - var(--rotate-percent))
-					)`,
-					transition: theme.transitions.create(['rotate'], {
-						duration: `var(--rotate-duration)`,
-						easing: theme.transitions.easing.easeInOut,
-					}),
-
-				})}
-			></SingleFish>
-		</Wrapper>
-	)
-}
+	{
+		color: "background1",
+		size: "small",
+		rotate: 50,
+		top: "16rem",
+		translateX: "-140%",
+		// flipX: true,
+		// flipY: true,
+	},
+]
 
 const Index: NextPageWithLayout = function () {
 	const fishRef = React.useRef<HTMLDivElement>();
@@ -190,33 +217,16 @@ const Index: NextPageWithLayout = function () {
 				rotate: "-25deg"
 			}}>
 				<Box flexGrow={1} flexBasis={0} position="relative">
-					<IndexPageFish
-						href="/about"
-						color="primary"
-						rotate={40}
-						bottom="14rem"
-						translateX="-100%"
-					>
-						ABOUT US
-					</IndexPageFish>
-					<IndexPageFish
-						href="/projects"
-						color="secondary"
-						rotate={-20}
-						bottom="2rem"
-						translateX="30%"
-						flip
-					>
-						PROJECTS
-					</IndexPageFish>
-					{/* <IndexPageFish
-						color="background1"
-						rotate={-20}
-						bottom="2rem"
-						translateX="30%"
-						flip
-					>
-					</IndexPageFish> */}
+					{
+						topFishPositions.map(({text, ...fishProps},i ) => (
+							<HomePageFish
+								rotatable={fishProps.href !== undefined}
+								{ ...fishProps }
+								key={i} /* using key as index is only ok because data is constant  */
+								children={text}
+							/>
+						))
+					}
 				</Box>
 				<Typography
 					variant="h1" color="primary"
@@ -231,6 +241,7 @@ const Index: NextPageWithLayout = function () {
 							}
 						},
 						pointerEvents: "none",
+						userSelect: "none",
 					})}
 				>
 					<RotateText {...rotateTextOptions} letterSpacing="0.5em">CULT </RotateText><br className="line-break"/>
@@ -238,16 +249,16 @@ const Index: NextPageWithLayout = function () {
 					<RotateText {...rotateTextOptions} letterSpacing="0.5em"> POISSON</RotateText>
 				</Typography>
 				<Box flexGrow={1} flexBasis={0} position="relative">
-					<IndexPageFish
-						href="/devlogs"
-						color="tertiary"
-						rotate={40}
-						top="8rem"
-						translateX="-10%"
-						flip
-					>
-						DEVLOGS
-					</IndexPageFish>
+					{
+						bottomFishPositions.map(({text, ...fishProps},i ) => (
+							<HomePageFish
+								rotatable={fishProps.href !== undefined}
+								{ ...fishProps }
+								key={i} /* using key as index is only ok because data is constant  */
+								children={text}
+							/>
+						))
+					}
 				</Box>
 			</Box>
 			<Box sx={{

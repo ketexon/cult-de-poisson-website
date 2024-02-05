@@ -8,7 +8,7 @@ import formatDate from "~/util/formatDate";
 
 import PageViewTemplate from "~/templates/PageView";
 
-const { getStaticPaths, getStaticProps, component } = PageViewTemplate(pages);
+const { getStaticPaths, getStaticProps, component } = PageViewTemplate("/devlog", pages);
 
 export { getStaticPaths, getStaticProps };
 export default component;

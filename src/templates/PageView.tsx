@@ -9,12 +9,13 @@ import { Page, PageIndex } from "~/types/Page";
 import { Template } from "./Template";
 import Head from "next/head";
 import generateTitle from "~/util/generateTitle";
+import PostCard from "~/components/PostCard";
 
 type MDXRendererProps = {
 	page: string,
 }
 
-export default function(pages: PageIndex, pageSegmentName: string = "page"): Template<MDXRendererProps> {
+export default function(baseUrl: string, pages: PageIndex, pageSegmentName: string = "page"): Template<MDXRendererProps> {
 	async function getStaticPaths({}: GetStaticPathsContext): Promise<GetStaticPathsResult> {
 		return {
 			paths: Object.keys(pages).map(page => ({ params: { [pageSegmentName]: page } })),
@@ -32,22 +33,11 @@ export default function(pages: PageIndex, pageSegmentName: string = "page"): Tem
 
 	function MDXRenderer({ page }: MDXRendererProps){
 		const mdxModule = pages[page] as MDXModule;
-		const post = parsePost(mdxModule.frontmatter);
+		const post = parsePost(mdxModule, page);
 
 		return <>
 			<Head><title>{generateTitle(post.title)}</title></Head>
-			<Stack gap={2}>
-				<Box><Link href="./">Back to Devlogs</Link></Box>
-				<Stack>
-					<Typography variant="h1">
-						{post.title}
-					</Typography>
-					<Typography variant="subtitle1" component="time" dateTime={formatHTMLTimeDate(post.date)}>
-						{formatDate(post.date)}
-					</Typography>
-				</Stack>
-				<mdxModule.default/>
-			</Stack>
+			<PostCard type="page" post={post} backHref={baseUrl} />
 		</>
 	}
 

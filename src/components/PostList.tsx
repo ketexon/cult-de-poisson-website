@@ -7,6 +7,7 @@ import { Stack, Typography } from "@mui/material";
 import path from "path";
 import Head from "next/head";
 import generateTitle from "~/util/generateTitle";
+import Heading from "./Heading";
 
 export type PostListProps = {
 	title: string,
@@ -17,17 +18,16 @@ export type PostListProps = {
 export default function PostList({ title, baseURL, pages }: PostListProps){
 	return <>
 		<Head><title>{generateTitle(title)}</title></Head>
-		<Stack direction="column" gap={2}>
-			<Typography variant="h1">{title}</Typography>
-			<Stack direction="column" gap={1}>
+		<Stack direction="column" gap={2} mb={8}>
+			<Heading>{title}</Heading>
+			<Stack direction="column" gap={16}>
 				{ Object.entries(pages).map(([key, page]) => {
-					const frontmatter = page.frontmatter;
-					const post = parsePost(frontmatter);
+					const post = parsePost(page, key);
 					if(post === null){
-						console.error(`${title}: Page with filename "${key}" does not have required frontmatter.`);
+						console.error(`${title}: Page \`${key}\` is missing frontmatter or exports.`);
 						return null;
 					}
-					return <PostCard key={key} post={post} href={path.join(baseURL, key).replaceAll('\\', '/')} />
+					return <PostCard type="link" key={key} post={post} href={path.join(baseURL, key).replaceAll('\\', '/')} />
 				})}
 			</Stack>
 		</Stack>

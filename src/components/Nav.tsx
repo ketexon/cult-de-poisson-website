@@ -98,6 +98,7 @@ export default function Nav({ }: NavProps){
 					flexGrow={1}
 					textAlign="center"
 					lineHeight={0.5}
+					fontSize="2rem"
 				>
 					cult de poisson
 				</Typography>
