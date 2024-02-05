@@ -52,8 +52,6 @@ jobs:
         run: yarn install
       - name: Build with Next.js and codegen
         run: yarn build
-      - name: Static HTML export with Next.js
-        run: yarn export
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
