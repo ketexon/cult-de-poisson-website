@@ -44,6 +44,6 @@
     "gen:dev": "tsx src/codegen/index-content.ts --draft",
     "gen:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts\"",
     "gen:dev:watch": "nodemon --watch next.config.mjs --watch src/codegen --watch src/pages -e js,mjs,jsx,ts,tsx,mdx --exec \"tsx src/codegen/index-content.ts --draft\"",
-    "dev": "concurrently \"yarn dev-server\" \"yarn gen:watch --draft\""
+    "dev": "concurrently \"yarn dev:server\" \"yarn gen:watch --draft\""
   }
 }
