@@ -25,7 +25,9 @@ type FishPosition = {
 		"size" | "flipX" | "flipY"
 	>
 
-const topFishPositions: FishPosition[] = [
+const fishTranslateXOffset = "20%";
+
+const topFishPositionsLarge: FishPosition[] = [
 	{
 		text: "ABOUT US",
 		href: "/about",
@@ -56,7 +58,7 @@ const topFishPositions: FishPosition[] = [
 		size: "medium",
 
 		rotate: 0,
-		bottom: "0",
+		bottom: "0rem",
 		translateX: "-140%",
 		flipX: true, flipY: true,
 	},
@@ -99,7 +101,81 @@ const topFishPositions: FishPosition[] = [
 	},
 ]
 
-const bottomFishPositions: FishPosition[] = [
+const topFishPositionsSmall: FishPosition[] = [
+	{
+		text: "ABOUT US",
+		href: "/about",
+		color: "primary",
+		rotate: 50,
+		bottom: "16rem", translateX: "-40%",
+	},
+	{
+		text: "PROJECTS",
+		href: "/projects",
+		color: "secondary",
+		rotate: -20,
+		bottom: "0rem", translateX: "-30%",
+		flipX: true, flipY: true,
+	},
+
+	{
+		color: "background1",
+		size: "medium",
+
+		rotate: -40,
+		bottom: "6rem",
+		translateX: "-100%",
+	},
+
+	{
+		color: "background2",
+		size: "medium",
+
+		rotate: 50,
+		bottom: "16rem",
+		translateX: "50%",
+		flipX: true, flipY: true,
+	},
+
+	// {
+	// 	color: "background1",
+	// 	size: "large",
+
+	// 	rotate: -60,
+	// 	bottom: "6rem",
+	// 	translateX: "-180%",
+	// },
+
+	// {
+	// 	color: "background2",
+	// 	size: "medium",
+
+	// 	rotate: -80,
+	// 	bottom: "34rem",
+	// 	translateX: "-170%",
+	// },
+
+	// {
+	// 	color: "background2",
+	// 	size: "medium",
+
+	// 	rotate: 75,
+	// 	bottom: "21rem",
+	// 	translateX: "-40%",
+	// },
+
+	// {
+	// 	color: "background1",
+	// 	size: "medium",
+
+	// 	rotate: 40,
+	// 	bottom: "5rem",
+	// 	translateX: "150%",
+	// 	flipX: true,
+	// },
+]
+
+const bottomFishPositionsLarge: FishPosition[] = [
 	{
 		text: "DEVLOGS",
 		href: "/devlog",
@@ -178,16 +254,92 @@ const bottomFishPositions: FishPosition[] = [
 		rotate: 50,
 		top: "16rem",
 		translateX: "-140%",
-		// flipX: true,
-		// flipY: true,
 	},
 ]
 
+const bottomFishPositionsSmall: FishPosition[] = [
+	{
+		text: "DEVLOGS",
+		href: "/devlog",
+		color: "tertiary",
+		rotate: 40,
+		top: "4rem",
+		translateX: "-100%",
+		flipX: true,
+	},
+
+	{
+		color: "background1",
+		size: "small",
+		rotate: -30,
+		top: "1rem",
+		translateX: "0%",
+	},
+
+	{
+		color: "background2",
+		size: "large",
+		rotate: -30,
+		top: "6rem",
+		translateX: "-190%",
+		flipX: true,
+	},
+
+	{
+		color: "background1",
+		size: "small",
+		rotate: 50,
+		top: "16rem",
+		translateX: "-150%",
+	},
+
+	// {
+	// 	color: "background1",
+	// 	size: "small",
+	// 	rotate: 50,
+	// 	top: "5rem",
+	// 	translateX: "70%",
+	// 	flipY: true,
+	// },
+
+	// {
+	// 	color: "background2",
+	// 	size: "small",
+	// 	rotate: 70,
+	// 	top: "4rem",
+	// 	translateX: "150%",
+	// 	flipX: true,
+	// },
+
+	// {
+	// 	color: "background2",
+	// 	size: "small",
+	// 	rotate: -10,
+	// 	top: "22rem",
+	// 	translateX: "95%",
+	// 	flipX: true,
+	// },
+
+	// {
+	// 	color: "background1",
+	// 	size: "small",
+	// 	rotate: 90,
+	// 	top: "22rem",
+	// 	translateX: "-40%",
+	// 	flipX: true,
+	// 	flipY: true,
+	// },
+
+	// {
+	// 	color: "background1",
+	// 	size: "small",
+	// 	rotate: 50,
+	// 	top: "16rem",
+	// 	translateX: "-140%",
+	// },
+]
+
 const Index: NextPageWithLayout = function () {
-	const fishRef = React.useRef<HTMLDivElement>();
-
-	const router = useRouter();
-
 	const rotateAmount = -25;
 	const rotateTextOptions: Partial<RotateTextProps> = {
 		rotateCenter: -rotateAmount,
@@ -208,19 +360,49 @@ const Index: NextPageWithLayout = function () {
 				gridRowStart: 1,
 				gridColumnStart: 1,
 			},
+			minWidth: 0,
 		})}>
-			<Box sx={{
+			<Box sx={theme => ({
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "center",
 				alignItems: "stretch",
-				rotate: "-25deg"
-			}}>
-				<Box flexGrow={1} flexBasis={0} position="relative">
+				rotate: `${rotateAmount}deg`,
+				transformOrigin: "50% 50%",
+				translate: "0 02rem",
+				[theme.breakpoints.down("lg")]: {
+					scale: "0.8",
+				},
+			})}>
+				{/* LARGE */}
+				<Box flexGrow={1} flexBasis={0} position="relative" sx={theme => ({
+					[theme.breakpoints.down("lg")]: {
+						display: "none",
+					}
+				})}>
 					{
-						topFishPositions.map(({text, ...fishProps},i ) => (
+						topFishPositionsLarge.map(({text, translateX, ...fishProps},i ) => (
 							<HomePageFish
 								rotatable={fishProps.href !== undefined}
+								translateX={`calc(${translateX ?? "0px"} + ${fishTranslateXOffset})`}
+								{ ...fishProps }
+								key={i} /* using key as index is only ok because data is constant  */
+								children={text}
+							/>
+						))
+					}
+				</Box>
+				{/* SMALL */}
+				<Box flexGrow={1} flexBasis={0} position="relative" sx={theme => ({
+					[theme.breakpoints.up("lg")]: {
+						display: "none",
+					}
+				})}>
+					{
+						topFishPositionsSmall.map(({text, translateX, ...fishProps},i ) => (
+							<HomePageFish
+								rotatable={fishProps.href !== undefined}
+								translateX={`calc(${translateX ?? "0px"} + ${fishTranslateXOffset})`}
 								{ ...fishProps }
 								key={i} /* using key as index is only ok because data is constant  */
 								children={text}
@@ -230,29 +412,57 @@ const Index: NextPageWithLayout = function () {
 				</Box>
 				<Typography
 					variant="h1" color="primary"
-					fontSize="5rem"
+					fontSize="3rem"
 					textAlign="center"
 					sx={theme => ({
+						display: "block",
 						whiteSpace: "nowrap",
 						lineHeight: 0.8,
 						[theme.breakpoints.up("lg")]: {
 							"& > .line-break": {
 								display: "none",
-							}
+							},
+							fontSize: "5rem"
 						},
 						pointerEvents: "none",
 						userSelect: "none",
+						marginLeft: "-24rem",
+						marginRight: "-24rem"
 					})}
 				>
 					<RotateText {...rotateTextOptions} letterSpacing="0.5em">CULT </RotateText><br className="line-break"/>
 					<RotateText {...rotateTextOptions} letterSpacing="0.25em" typographyProps={{ fontSize: "0.75em"}} lineHeight={1.5}>de</RotateText><br className="line-break"/>
 					<RotateText {...rotateTextOptions} letterSpacing="0.5em"> POISSON</RotateText>
 				</Typography>
-				<Box flexGrow={1} flexBasis={0} position="relative">
+				{/* BOTTOM FISH LARGE */}
+				<Box flexGrow={1} flexBasis={0} position="relative" sx={theme => ({
+					[theme.breakpoints.down("lg")]: {
+						display: "none",
+					}
+				})}>
 					{
-						bottomFishPositions.map(({text, ...fishProps},i ) => (
+						bottomFishPositionsLarge.map(({text, translateX, ...fishProps},i ) => (
 							<HomePageFish
 								rotatable={fishProps.href !== undefined}
+								translateX={`calc(${translateX ?? "0px"} + ${fishTranslateXOffset})`}
+								{ ...fishProps }
+								key={i} /* using key as index is only ok because data is constant  */
+								children={text}
+							/>
+						))
+					}
+				</Box>
+				{/* BOTTOM FISH SMALL */}
+				<Box flexGrow={1} flexBasis={0} position="relative" sx={theme => ({
+					[theme.breakpoints.up("lg")]: {
+						display: "none",
+					}
+				})}>
+					{
+						bottomFishPositionsSmall.map(({text, translateX, ...fishProps},i ) => (
+							<HomePageFish
+								rotatable={fishProps.href !== undefined}
+								translateX={`calc(${translateX ?? "0px"} + ${fishTranslateXOffset})`}
 								{ ...fishProps }
 								key={i} /* using key as index is only ok because data is constant  */
 								children={text}

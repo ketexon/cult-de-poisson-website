@@ -19,28 +19,33 @@ export default function About() {
 		</Head>
 		<Heading seed="4">About us</Heading>
 		<Typography variant="h1" component="h2">
+			Who Are We
+		</Typography>
+		<Box color="white">
+			<Typography variant="body1">
+				Cult de Poisson is an indie studio formed by UCLA students Nicolette Bond, Maya Balakrish, Anbu V, and Aubrey Clark.
+			</Typography>
+			<Typography variant="body1" color="white">
+				We make video games!
+			</Typography>
+		</Box>
+		<Typography variant="h1" component="h2">
 			Officers
 		</Typography>
-		<Box sx={{
+		<Box sx={theme => ({
 			display: "grid",
 			px: 8,
 			my: 2,
 			gap: 4,
 			gridTemplateColumns: "repeat(2, 1fr)",
 			gridAutoRows: "1fr",
-		}}>
+			[theme.breakpoints.down("md")]: {
+				gridTemplateColumns: "1fr",
+			}
+		})}>
 			{members.map(({ name, description, headshot }) => (
 				<Card imageSrc={headshot} name={name} description={description} />
 			))}
 		</Box>
-		<Typography variant="h1" component="h2">
-			Who Are We
-		</Typography>
-		<Typography variant="body1">
-			Cult de Poisson is an indie studio formed by UCLA students Nicolette Bond, Maya Balakrish, Anbu V, and Aubrey Clark.
-		</Typography>
-		<Typography variant="body1">
-			We make video games!
-		</Typography>
 	</>
 }
