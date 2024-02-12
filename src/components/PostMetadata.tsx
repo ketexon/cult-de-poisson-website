@@ -16,6 +16,7 @@ export default function PostMetadata({ post, baseUrl }: PostMetadataProps){
 			title: post.title,
 			type: "article",
 			images: [{ src: post.image.src, width: post.image.width, height: post.image.height, alt: post.imageAlt }],
+			cardImage: post.image.src,
 			url: `${origin}${baseUrl}/${post.filename}`,
 
 			description: post.description,
