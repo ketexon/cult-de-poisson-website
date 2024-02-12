@@ -1,6 +1,6 @@
-# Cult de Poisson Website
+# Culte du Poisson Website
 
-Official website for Cult de Poisson.
+Official website for Culte du Poisson.
 
 ## Stack
 
@@ -44,7 +44,7 @@ The about page includes a "Who we are" section, as well as a list of members.
 
 ### Projects
 
-The projects page includes what Cult de Poisson is working on.
+The projects page includes what Culte du Poisson is working on.
 
 ### Dev Log
 
