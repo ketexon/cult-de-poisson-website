@@ -59,7 +59,7 @@ export default function About() {
 			justifyItems: "center"
 		})}>
 			{members.map(({ name, description, headshot, links }) => (
-				<Card imageSrc={headshot} name={name} description={description} links={links} />
+				<Card imageSrc={headshot} name={name} description={description} links={links} key={name} />
 			))}
 		</Box>
 	</>
