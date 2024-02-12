@@ -63,6 +63,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 		<ThemeProvider theme={theme}>
 			<Head>
 				<meta charSet="utf-8"/>
+				<meta property="og:site_name" content="Culte du Poisson"/>
 			</Head>
 			<Metadata {...{
 				title: "Culte du Poisson",

@@ -360,7 +360,7 @@ const Index: NextPageWithLayout = function () {
 	return <>
 		<Head>
 			<title>{generateTitle()}</title>
-			<meta name="og:type" content="website"/>
+			<meta property="og:type" content="website"/>
 		</Head>
 		<Box sx={theme => ({
 			height: "100%",
