@@ -60,7 +60,7 @@ export default [
 	{
 		name: "Aubrey Clark",
 		role: "Technical Lead",
-		description: "Technical lead of Cult de Poisson. UCLA class of 2025 Linguistics and Computer Science major and mathematics minor.",
+		description: "Technical lead of Culte du Poisson. UCLA class of 2025 Linguistics and Computer Science major and mathematics minor.",
 		headshot: AubreyHeadshot,
 		links: [
 			{

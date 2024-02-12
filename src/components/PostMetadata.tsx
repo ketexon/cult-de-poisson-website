@@ -10,6 +10,7 @@ export type PostMetadataProps = {
 }
 
 export default function PostMetadata({ post, baseUrl }: PostMetadataProps){
+	console.log(post.description)
 	return <Metadata
 		{...{
 			title: post.title,
