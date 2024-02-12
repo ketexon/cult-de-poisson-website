@@ -7,13 +7,12 @@ export type MetadataProps = {
 	url: string,
 	type?: "article" | "website",
 	images?: { src: string, width?: number, height?: number, alt?: string }[],
-	cardImage?: string,
 	description?: string,
 	publishedDate?: Date,
 	author?: string,
 }
 
-export default function Metadata({ title, url, type, images, cardImage, description, publishedDate, author}: MetadataProps){
+export default function Metadata({ title, url, type, images, description, publishedDate, author}: MetadataProps){
 	return <Head>
 		<meta property="og:title" content={title} key="og:title"/>
 		<meta property="og:url" content={url} key="og:url" />
@@ -37,6 +36,6 @@ export default function Metadata({ title, url, type, images, cardImage, descript
 			<meta property="profile:first_name" key="profile:first_name" content={author.split(" ")[0]}/>
 			<meta property="profile:last_name" key="profile:last_name" content={author.split(" ").at(-1)} />
 		</>}
-		{ cardImage && <meta name="twitter:card" content={cardImage} />}
+		<meta name="twitter:card" content="summary_large_image" />
 	</Head>
 }
