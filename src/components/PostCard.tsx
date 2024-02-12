@@ -176,7 +176,7 @@ export default function PostCard(props: PostCardProps){
 						whiteSpace: "nowrap",
 						fontSize: "1rem"
 					})}>
-						<RotateText animate={false} seed="1">CULTE de</RotateText><br/>
+						<RotateText animate={false} seed="1">CULTE du</RotateText><br/>
 						<RotateText animate={false} seed="16">POISSON</RotateText>
 					</Heading>
 					<Typography variant="body1" fontFamily="monospace" textAlign="center" lineHeight={1}>
@@ -194,7 +194,6 @@ export default function PostCard(props: PostCardProps){
 				}}>
 					<span>---</span><span className="post__title">{ post.title }</span><span>---</span>
 				</Typography>
-				{ props.type === "page" && postDate }
 				{ props.type === "link" && post.image && (
 					<Image src={post.image} alt={post.imageAlt} caption={post.imageCaption} captionProps={{ sx: { fontFamily: "monospace" }}} height="16rem"/>
 				)}
@@ -211,7 +210,7 @@ export default function PostCard(props: PostCardProps){
 						<post.Component {...mdxProps}/>
 					</MuiContainer>
 				)}
-				{ props.type === "link" && postDate }
+				{ postDate }
 			</Stack>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 690 17">
 				<polygon fill={theme.palette.background.default} points="686.32 9.45 673.82 0 661.32 9.45 648.82 0 636.32 9.45 623.82 0 612.32 8.69 600.82 0 588.32 9.45 575.82 0 563.82 9.07 551.82 0 539.32 9.45 526.82 0 515.32 8.69 503.82 0 491.32 9.45 478.82 0 466.32 9.45 453.82 0 441.32 9.45 428.82 0 417.32 8.69 405.82 0 393.32 9.45 380.82 0 371.66 6.92 362.5 0 350 9.45 337.5 0 326 8.69 314.5 0 302 9.45 289.5 0 277 9.45 264.5 0 252 9.45 239.5 0 228 8.69 216.5 0 204 9.45 191.5 0 179.5 9.07 167.5 0 155 9.45 142.5 0 131 8.69 119.5 0 107 9.45 94.5 0 82 9.45 69.5 0 57 9.45 44.5 0 33 8.69 21.5 0 9 9.45 0 2.65 0 18 20.32 18 20.68 18 45.32 18 45.68 18 68.32 18 70.68 18 93.32 18 95.68 18 118.32 18 118.68 18 143.32 18 143.68 18 166.32 18 167.68 18 191.32 18 192.68 18 215.32 18 215.68 18 240.32 18 240.68 18 263.32 18 265.68 18 288.32 18 290.68 18 313.32 18 313.68 18 338.32 18 338.68 18 357 18 361.32 18 382 18 386.32 18 404.63 18 405 18 429.63 18 430 18 452.63 18 455 18 477.63 18 480 18 502.63 18 503 18 527.63 18 528 18 550.63 18 552 18 575.63 18 577 18 599.63 18 600 18 624.63 18 625 18 647.63 18 650 18 672.63 18 675 18 691 18 691 5.91 686.32 9.45"/>

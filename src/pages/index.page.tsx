@@ -443,8 +443,8 @@ const Index: NextPageWithLayout = function () {
 						marginRight: "-24rem"
 					})}
 				>
-					<RotateText {...rotateTextOptions} letterSpacing="0.5em">CULT </RotateText><br className="line-break"/>
-					<RotateText {...rotateTextOptions} letterSpacing="0.25em" typographyProps={{ fontSize: "0.75em"}} lineHeight={1.5}>de</RotateText><br className="line-break"/>
+					<RotateText {...rotateTextOptions} letterSpacing="0.5em">CULTE </RotateText><br className="line-break"/>
+					<RotateText {...rotateTextOptions} letterSpacing="0.25em" typographyProps={{ fontSize: "0.75em"}} lineHeight={1.5}>du</RotateText><br className="line-break"/>
 					<RotateText {...rotateTextOptions} letterSpacing="0.5em"> POISSON</RotateText>
 				</Typography>
 				{/* BOTTOM FISH LARGE */}

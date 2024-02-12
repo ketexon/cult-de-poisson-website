@@ -40,6 +40,7 @@ export default function Card({ imageSrc, name, description, links }: CardProps) 
 	return <Box sx={{
 		display: "flex",
 		flexDirection: "column",
+		maxWidth: "24rem"
 	}}>
 		{/* <svg viewBox="0 0 100 100">
 			<ellipse cx="50" cy="50" rx="50" ry="50" fill={borderColor} />

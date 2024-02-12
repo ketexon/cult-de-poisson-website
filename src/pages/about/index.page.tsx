@@ -54,7 +54,9 @@ export default function About() {
 			gridAutoRows: "1fr",
 			[theme.breakpoints.down("md")]: {
 				gridTemplateColumns: "1fr",
-			}
+				px: 0,
+			},
+			justifyItems: "center"
 		})}>
 			{members.map(({ name, description, headshot, links }) => (
 				<Card imageSrc={headshot} name={name} description={description} links={links} />
