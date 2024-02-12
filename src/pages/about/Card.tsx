@@ -2,11 +2,13 @@ import { Box, Typography } from "@mui/material"
 import Image, { ImageProps } from "next/image"
 
 import seedrandom from "seedrandom"
+import Icon from "~/components/Icon"
 
 export type CardProps = {
 	imageSrc: Exclude<ImageProps["src"], string>,
 	name: string,
 	description: string,
+	links: { icon: string, href: string }[]
 }
 
 const Pin = (props: React.SVGProps<SVGSVGElement>) => (
@@ -24,7 +26,7 @@ const Pin = (props: React.SVGProps<SVGSVGElement>) => (
 
 )
 
-export default function Card({ imageSrc, name, description }: CardProps) {
+export default function Card({ imageSrc, name, description, links }: CardProps) {
 	const rng = seedrandom(name);
 	const imageRotation = - rng() * 15;
 
@@ -72,11 +74,11 @@ export default function Card({ imageSrc, name, description }: CardProps) {
 						justifySelf: "center",
 						alignSelf: "center",
 					},
-					aspectRatio: aspect,
+					aspectRatio: 1,
 					"--origin-x": "3rem",
 					"--origin-y": "4rem",
 					transformOrigin: "var(--origin-x) var(--origin-y)",
-					transform: `rotate(${imageRotation}deg)`
+					transform: `rotate(${imageRotation}deg)`,
 				}}>
 					<svg viewBox="0 0 341 314" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
 						width: "100%",
@@ -116,7 +118,9 @@ export default function Card({ imageSrc, name, description }: CardProps) {
 
 					<Image src={imageSrc} alt="" style={{
 						width: "60%", height: "unset",
-						aspectRatio: aspect,
+						aspectRatio: 1,
+						objectFit: "cover",
+						objectPosition: "center",
 						transform: `translateX(-5px)`
 					}} />
 				</Box>
@@ -162,7 +166,9 @@ export default function Card({ imageSrc, name, description }: CardProps) {
 						gridColumnStart: 2,
 						width: "100%",
 						backgroundColor: "#E1AC0C",
-						p: 2
+						p: 2,
+						display: "flex",
+						flexDirection: "column",
 					}}>
 						<Typography variant="h2" component="h1" color="#28471A" textAlign="center">
 							{name}
@@ -170,6 +176,18 @@ export default function Card({ imageSrc, name, description }: CardProps) {
 						<Typography variant="body2" color="#8A6B0C">
 							{description}
 						</Typography>
+						<Box flexGrow={1} sx={{
+							mt: 2,
+							display: "flex",
+							flexDirection: "row",
+							alignItems: "end",
+						}}>
+							{
+								links?.map(({ icon, href }) => (
+									<Icon name={icon} href={href} target="_blank"/>
+								))
+							}
+						</Box>
 					</Box>
 				</Box>
 			</Box>

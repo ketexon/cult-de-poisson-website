@@ -1,0 +1,40 @@
+---
+title: God rays, concept art, the journal
+description:
+date: 11 February 2024
+published: true
+author: Kenzie MacDougal
+---
+{ /* this is an example of how to use local images */ }
+import BoatConcept from "./trinh-boat.webp"
+import Shaders from "./harry-biolumin.webp"
+import FishermanConcept from "./fisherman-concept-art.webp"
+import Journal from "./journal-3d-model.webp"
+
+import Image from "@/Image"
+
+export const image = BoatConcept
+export const imageAlt = "Concept for the boat from the intro area to the game"
+export const imageCaption = imageAlt
+
+Compiled by Kenzie MacDougal
+
+Welcome to Cult de Poisson's first official devlog! Through these, we hope to share sneak peeks of various features we've been working on, and let you in on our process.
+
+## GOD RAYS & BIOLUMINESCENCE
+Developed by one of our programmers, Harry, “god rays” and bioluminescence were implemented with the intention of giving our oceans a sense of wonder. They are implemented via Unity's particle system, which can be modified to give the glow directionality. Bioluminescent particles were implemented using both Shader Graph and the particle system.
+
+<Image src={Shaders} alt="Demo of shaders: toon shader, hologram shader, and particle-system based god rays" caption="Credit: Harry Hinman" />
+
+## CONCEPT ART
+Before 3D artists can begin sculpting, our concept artists bear the responsibility of designing the element, whether it be a collectable, fish, environmental prop, or character! Here are a couple of our favorites from the past few weeks:
+
+<Image src={BoatConcept} alt="Concept art of the boat with reference photos" caption="Credit: Trinh Ha" />
+<Image src={FishermanConcept} height="32rem" alt="Concept art of the fisherman from different angles" caption="Credit: Derek Jiang" />
+
+Of course, we can't give too much context... no spoilers here!
+
+## The Journal
+And last but certainly not least, here's the 3D model for the player's journal! This is instrumental to gameplay and progression.
+
+<Image src={Journal} alt="3D model of the journal"/>

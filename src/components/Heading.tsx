@@ -1,4 +1,4 @@
-import { SxProps, Typography, TypographyProps } from "@mui/material";
+import { SxProps, Theme, Typography, TypographyProps } from "@mui/material";
 import RotateText from "./RotateText";
 import React from "react";
 
@@ -7,7 +7,7 @@ export type HeadingProps = {
 	children?: React.ReactNode,
 	seed?: string,
 	textTransform?: React.CSSProperties["textTransform"],
-	sx?: SxProps,
+	sx?: SxProps<Theme>,
 	component?: TypographyProps["component"],
 	fontSize?: string,
 }
@@ -23,7 +23,6 @@ export default function Heading({ letterSpacing, children, seed, textTransform, 
 			variant="h1" component={component}
 			fontFamily="sniglet" fontWeight={800}
 			color="primary"
-			fontSize={fontSize}
 			letterSpacing={`${letterSpacing}rem`}
 			textAlign="center"
 			sx={[{
@@ -33,10 +32,12 @@ export default function Heading({ letterSpacing, children, seed, textTransform, 
 			}, ...[sx ?? []].flat()]}
 			textTransform={textTransform ?? "uppercase"}
 		>
+			<span style={{ fontSize: "2em" }}>
 			{ typeof children === "string"
 				? <RotateText seed={seed}>{children}</RotateText>
 				: children
 			}
+			</span>
 		</Typography>
 	)
 }

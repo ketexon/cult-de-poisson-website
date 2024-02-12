@@ -35,10 +35,16 @@ const topFishPositionsLarge: FishPosition[] = [
 		rotate: 45,
 		bottom: "16rem", translateX: "-100%",
 	},
+	// {
+	// 	text: "PROJECTS",
+	// 	href: "/projects",
+	// 	color: "secondary",
+	// 	rotate: -20,
+	// 	bottom: "0rem", translateX: "30%",
+	// 	flipX: true, flipY: true,
+	// },
 	{
-		text: "PROJECTS",
-		href: "/projects",
-		color: "secondary",
+		color: "background2",
 		rotate: -20,
 		bottom: "0rem", translateX: "30%",
 		flipX: true, flipY: true,
@@ -109,10 +115,16 @@ const topFishPositionsSmall: FishPosition[] = [
 		rotate: 50,
 		bottom: "16rem", translateX: "-40%",
 	},
+	// {
+	// 	text: "PROJECTS",
+	// 	href: "/projects",
+	// 	color: "secondary",
+	// 	rotate: -20,
+	// 	bottom: "0rem", translateX: "-30%",
+	// 	flipX: true, flipY: true,
+	// },
 	{
-		text: "PROJECTS",
-		href: "/projects",
-		color: "secondary",
+		color: "background2",
 		rotate: -20,
 		bottom: "0rem", translateX: "-30%",
 		flipX: true, flipY: true,
@@ -348,6 +360,7 @@ const Index: NextPageWithLayout = function () {
 	return <>
 		<Head>
 			<title>{generateTitle()}</title>
+			<meta name="og:type" content="website"/>
 		</Head>
 		<Box sx={theme => ({
 			height: "100%",

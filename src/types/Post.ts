@@ -3,16 +3,20 @@ import { StaticImageData } from "next/image";
 
 export type Post = {
 	title: string,
+	filename: string,
 	description?: string,
 	date: Date,
+	author?: string,
 	Component: (props: MDXProps) => React.ReactNode
 } & (
 	{
 		image: StaticImageData,
 		imageAlt: string,
+		imageCaption?: string,
 	} | {
 		image: undefined,
-		imageAlt: undefined
+		imageAlt: undefined,
+		imageCaption: undefined,
 	}
 )
 
@@ -63,15 +67,19 @@ export function parsePost(page: MDXModule, filename: string): Post {
 
 	return {
 		title,
+		filename,
 		description,
 		date: new Date(dateMs),
+		author: frontmatter.author as string,
 		Component: page.default,
 		...image !== undefined ? {
 			image: image as StaticImageData,
 			imageAlt: page.imageAlt as string,
+			imageCaption: page.imageCaption as string | undefined,
 		} : {
 			image: undefined,
 			imageAlt: undefined,
+			imageCaption: undefined,
 		}
 	}
 }

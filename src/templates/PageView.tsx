@@ -10,6 +10,7 @@ import { Template } from "./Template";
 import Head from "next/head";
 import generateTitle from "~/util/generateTitle";
 import PostCard from "~/components/PostCard";
+import PostMetadata from "~/components/PostMetadata";
 
 type MDXRendererProps = {
 	page: string,
@@ -36,7 +37,10 @@ export default function(baseUrl: string, pages: PageIndex, pageSegmentName: stri
 		const post = parsePost(mdxModule, page);
 
 		return <>
-			<Head><title>{generateTitle(post.title)}</title></Head>
+			<Head>
+				<title>{generateTitle(post.title)}</title>
+			</Head>
+			<PostMetadata post={post} baseUrl={baseUrl} />
 			<PostCard type="page" post={post} backHref={baseUrl} />
 		</>
 	}

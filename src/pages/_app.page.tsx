@@ -12,6 +12,7 @@ import { Box } from "@mui/material";
 
 import "../styles/main.css"
 import Nav from "../components/Nav";
+import "devicon"
 import Head from "next/head";
 import generateTitle from "~/util/generateTitle";
 import Container from "~/components/Container";
@@ -19,6 +20,8 @@ import Container from "~/components/Container";
 import crumpledPaperBackground from "~/assets/backgrounds/crumpled-paper.png"
 import { AppProps } from "next/app";
 import { NextPage } from "next";
+import { origin } from "~/origin";
+import Metadata from "~/components/Metadata";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -58,6 +61,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<Head>
+				<meta charSet="utf-8"/>
+			</Head>
+			<Metadata {...{
+				title: "Culte du Poisson",
+				url: origin,
+				type: "website",
+				images: [{ src: `${origin}/favicon.png`}]
+			}}/>
 			<CssBaseline />
 			{getLayout(<Component {...pageProps}/>)}
 		</ThemeProvider>

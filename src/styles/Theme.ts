@@ -1,9 +1,9 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import createPalette from "@mui/material/styles/createPalette";
 
 const primary = "#FF9900";
 
-export default createTheme({
+export default responsiveFontSizes(createTheme({
 	typography: {
 		h1: {
 			fontSize: "3rem",
@@ -36,10 +36,12 @@ export default createTheme({
 			fontSize: "1.25rem",
 			lineHeight: 1.5,
 			marginBottom: "1rem",
+			fontFamily: "Sniglet",
 		},
 		body2: {
 			fontSize: "1rem",
 			lineHeight: 1.15,
+			fontFamily: "Sniglet",
 		},
 		subtitle1: {
 			fontStyle: "italic",
@@ -68,4 +70,6 @@ export default createTheme({
 			}
 		}
 	}
+}), {
+
 })

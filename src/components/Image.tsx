@@ -1,14 +1,16 @@
-import { Stack, StackProps, Typography } from "@mui/material"
+import { Box, Stack, StackProps, Typography, TypographyProps } from "@mui/material"
 import NextImage, { ImageProps as NextImageProps } from "next/image"
 import { CSSProperties } from "react";
 
-export type ImageProps = NextImageProps & {
+export type ImageProps = Omit<NextImageProps, "width" | "height"> & {
+	imageWidth?: `${number}`,
+	imageHeight?: `${number}`,
 	caption?: string,
-	imageStyle?: NextImageProps["style"],
-	sx?: Exclude<StackProps["sx"], ReadonlyArray<any>>,
-	style?: StackProps["style"],
-	objectFit?: CSSProperties["objectFit"],
-	setAspectRatio?: boolean,
+	captionProps?: TypographyProps,
+	maxHeight?: string,
+	width?: string,
+	height?: string,
+	imageStyle?: NextImageProps["style"]
 }
 
 function getStaticImageData(src: ImageProps["src"]) {
@@ -23,34 +25,43 @@ function getImageSrc(src: ImageProps["src"]) {
 	return typeof getStaticImageData(src)?.src ?? src as string;
 }
 
-export default function Image({ caption, sx, imageStyle, setAspectRatio, ...props }: ImageProps){
-	setAspectRatio ??= false;
+export default function Image({ caption, captionProps, width, height, imageStyle, imageWidth, imageHeight, ...props }: ImageProps){
 	const staticImageData = getStaticImageData(props.src);
+	const aspect = staticImageData.width / staticImageData.height;
 
-	return <Stack component="figure" m={0} display="inline-flex" alignItems="stretch" sx={[
-			{
-				// float: "right",
-				"& .CDP-Image__img": {
-					objectFit: props.objectFit ?? "cover",
-					maxHeight: "100%",
-					...setAspectRatio && staticImageData ? {
-						aspectRatio: `${staticImageData.height} / ${staticImageData.width}`,
-					} : {},
-					...(imageStyle ?? {})
-				},
-			},
-			sx ?? {}
-		]}>
-		<NextImage
-			className="CDP-Image__img"
-			{...{
-				loading: "eager",
-				...props,
-				...(props.width && !props.height && staticImageData) ? {
-					height: parseInt(props.width.toString()) * staticImageData.height / staticImageData.width
-				} : {},
-			}}
-		/>
-		{ caption && <Typography variant="subtitle1" component="figcaption" sx={{ minWidth: 0, width: "100%", }}>{caption}</Typography>}
+	if(!width && !height){
+		height = "16rem"
+	}
+
+	width ??= height ? `calc(${height} * ${aspect})` : undefined;
+	height ??= width ? `calc(${width} / ${aspect})` : undefined;
+
+	return <Stack sx={{ alignItems: "center"}} mb={2}>
+		<Stack component="figure" m={0} maxWidth={width} gap={1}>
+			<NextImage
+				{...props}
+				{...{
+					width: imageWidth,
+					height: imageHeight
+				}}
+				style={{
+					...imageStyle ?? {},
+					width: width,
+					height: height,
+					objectFit: "contain",
+					aspectRatio: staticImageData.width / staticImageData.height
+				}}
+			/>
+			{caption && <Typography
+				component="figcaption"
+				variant="subtitle1"
+				lineHeight={1}
+				fontFamily="monospace"
+				textAlign="center"
+				{...captionProps}
+			>
+				{caption}
+			</Typography>}
+		</Stack>
 	</Stack>
 }

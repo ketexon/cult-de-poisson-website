@@ -100,7 +100,7 @@ export default function Nav({ }: NavProps){
 					lineHeight={0.5}
 					fontSize="2rem"
 				>
-					cult de poisson
+					culte du poisson
 				</Typography>
 			</Toolbar>
 		</AppBar>
