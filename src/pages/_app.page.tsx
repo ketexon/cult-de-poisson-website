@@ -1,18 +1,20 @@
 import * as React from "react";
 
+/* STYLESHEETs */
 import '@fontsource-variable/grandstander';
 
 import '@fontsource/sniglet/400.css';
 import '@fontsource/sniglet/800.css';
+
+import "devicon"
+import "../styles/main.css"
 
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../styles/Theme";
 import { Box } from "@mui/material";
 
-import "../styles/main.css"
 import Nav from "../components/Nav";
-import "devicon"
 import Head from "next/head";
 import generateTitle from "~/util/generateTitle";
 import Container from "~/components/Container";
@@ -22,6 +24,7 @@ import { AppProps } from "next/app";
 import { NextPage } from "next";
 import { origin } from "~/origin";
 import Metadata from "~/components/Metadata";
+
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -36,17 +39,6 @@ function DefaultLayout({ children }) {
 		<Box sx={{
 			position: "relative",
 		}}>
-			{/* <Box sx={{
-				position: "absolute",
-				top: 0, bottom: 0,
-				left: 0, right: 0,
-				pointerEvents: "none",
-				background: `url("${crumpledPaperBackground.src}")`,
-				backgroundRepeat: "repeat",
-				backgroundSize: "cover",
-				opacity: "0.2",
-				backgroundBlendMode: "darken"
-			}}></Box> */}
 			<Nav/>
 			<Container component="main">
 				{ children }
@@ -57,7 +49,6 @@ function DefaultLayout({ children }) {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
-	// if(Component.layout)
 
 	return (
 		<ThemeProvider theme={theme}>

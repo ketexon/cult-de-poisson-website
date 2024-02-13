@@ -35,7 +35,10 @@ export default responsiveFontSizes(createTheme({
 		body1: {
 			fontSize: "1.25rem",
 			lineHeight: 1.5,
-			marginBottom: "1rem",
+			/* NOTE: there is a 1rem margin-bottom on body1 typogrpahy.
+				This is applied in in the typography variants below, since applying it here
+				applies it to the <body> tag
+			*/
 			fontFamily: "Sniglet",
 		},
 		body2: {
@@ -68,6 +71,14 @@ export default responsiveFontSizes(createTheme({
 				disableRipple: true,
 				disableTouchRipple: true,
 			}
+		},
+		MuiTypography: {
+			variants: [
+				{
+					props: { variant: "body1" },
+					style: { marginBottom: "1rem" }
+				}
+			]
 		}
 	}
 }), {
