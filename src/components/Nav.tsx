@@ -29,6 +29,7 @@ export default function Nav({ }: NavProps){
 					duration: theme.transitions.duration.shortest,
 					easing: theme.transitions.easing.easeOut,
 				}),
+				boxSizing: "border-box",
 			})}
 		>
 			<Toolbar sx={theme => ({
@@ -36,7 +37,8 @@ export default function Nav({ }: NavProps){
 					duration: theme.transitions.duration.shortest,
 					easing: theme.transitions.easing.easeOut,
 				}),
-				pt: elevated ? 0 : 5,
+				pt: elevated ? 2.5 : 5,
+				pb: elevated ? 2.5 : 0,
 			})}>
 				<Box position="relative">
 					<IconButton onClick={() => { setOpen(o => !o); }}
